@@ -1,0 +1,44 @@
+services:
+  flask-app1:
+    build:
+      context: ./app_1
+    container_name: flask-app1
+    networks:
+      - flask-mongo-network
+    ports:
+      - "5001:5000"
+
+  flask-app2:
+    build:
+      context: ./app_2
+    container_name: flask-app2
+    networks:
+      - flask-mongo-network
+    ports:
+      - "5002:5000"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    networks:
+      - flask-mongo-network
+    ports:
+      - "27017:27017"
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    networks:
+      - flask-mongo-network
+    ports:
+      - "8080:80"
+    depends_on:
+      - flask-app1
+      - flask-app2
+
+networks:
+  flask-mongo-network:
+    driver: bridge
