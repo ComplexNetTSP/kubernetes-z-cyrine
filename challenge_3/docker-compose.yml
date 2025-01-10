@@ -1,0 +1,24 @@
+services:
+  flask-app:
+    build:
+      context: .
+    image: flask-app:v2
+    container_name: flask-app-v2
+    ports:
+      - "5000:5000"
+    networks:
+      - flask-mongo-network
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-container-v2
+    ports:
+      - "27017:27017"
+    networks:
+      - flask-mongo-network
+
+networks:
+  flask-mongo-network:  # Réseau pour connecter Flask et MongoDB
+    driver: bridge
