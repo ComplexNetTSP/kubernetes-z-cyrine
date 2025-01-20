@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: czribi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo
+        ports:
+        - containerPort: 27017
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+        livenessProbe:  # Configuration de la liveness probe
+          exec:
+            command:
+            - mongo
+            - --eval
+            - "db.adminCommand('ping')"
+          initialDelaySeconds: 10  # Temps avant la première vérification
+          periodSeconds: 10        # Vérifier toutes les 10 secondes
+          timeoutSeconds: 2        # Temps d'attente avant un échec
+          failureThreshold: 3      # Nombre d'échecs avant redémarrage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: czribi
+spec:
+  selector:
+    app: mongodb
+  ports:
+  - protocol: TCP
+    port: 27017
+    targetPort: 27017
+  type: ClusterIP

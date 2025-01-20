@@ -1,0 +1,21 @@
+Liveness Probe pour chaque conteneur :
+
+Web Servers (webnodb, webdb) :
+Type de probe : HTTP GET
+Chemin : /healthz
+Raison : Les applications web exposent souvent un endpoint HTTP accessible pour vérifier leur état de santé. Cela permet de détecter les blocages ou pannes au niveau applicatif.
+Stratégie :
+initialDelaySeconds: 10 : Attente de 10 secondes avant la première vérification pour permettre le démarrage.
+periodSeconds: 5 : Vérifications toutes les 5 secondes.
+failureThreshold: 3 : Le conteneur redémarre après 3 échecs consécutifs.
+
+
+Base de données (MongoDB) :
+Type de probe : Commande exécutée (exec)
+Commande : mongo --eval "db.adminCommand('ping')"
+Raison : Vérifie la connectivité à la base et la capacité à répondre aux commandes. Cela permet de s'assurer que MongoDB est opérationnel.
+Stratégie :
+initialDelaySeconds: 15 : Attente plus longue pour laisser la base se synchroniser.
+periodSeconds: 10 : Vérifications toutes les 10 secondes.
+failureThreshold: 5 : Redémarrage après 5 échecs consécutifs pour éviter des redémarrages inutiles.
+
