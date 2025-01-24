@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.webdb.service.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.webdb.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.webdb.service.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.webdb.service.name }}
+    spec:
+      containers:
+        - name: webdb
+          image: {{ .Values.webdb.image }}
+          ports:
+            - containerPort: {{ .Values.webdb.service.port }}
+          resources:
+            requests:
+              memory: {{ .Values.webdb.resources.requests.memory }}
+              cpu: {{ .Values.webdb.resources.requests.cpu }}
+            limits:
+              memory: {{ .Values.webdb.resources.limits.memory }}
+              cpu: {{ .Values.webdb.resources.limits.cpu }}

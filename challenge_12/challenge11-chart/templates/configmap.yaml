@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: challenge11-config
+  namespace: {{ .Release.Namespace }}
+data:
+  MONGO_URL: "mongodb://{{ .Values.mongodb.service.name }}:{{ .Values.mongodb.service.port }}/"
+
