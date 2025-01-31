@@ -1,0 +1,37 @@
+Creation des services :
+kubectl apply -f mongo-headless-service.yaml
+kubectl apply -f mongo-statefulset.yaml
+
+Connexion à MongoDB:
+kubectl exec -it mongodb-0 -n czribi -- mongosh
+ 
+Initialisation du replicat set:
+rs.initiate({
+  _id: "rs0",
+  members: [
+    { _id: 0, host: "mongodb-0.mongodb.czribi.svc.cluster.local:27017" },
+    { _id: 1, host: "mongodb-1.mongodb.czribi.svc.cluster.local:27017" },
+    { _id: 2, host: "mongodb-2.mongodb.czribi.svc.cluster.local:27017" }
+  ]
+})
+
+Verification de l'état:
+rs.status()
+
+Test:
+Primary:
+use testDB;
+db.testCollection.insertOne({ name: "Cyrine", message: "Hello from MongoDB!" });
+
+Secondary:
+db.testCollection.find();
+rs0 [direct: secondary] testDB> db.testCollection.find();
+[
+  {
+    _id: ObjectId('679ca15ef14b9c9e1e544ca7'),
+    name: 'Cyrine',
+    message: 'Hello from MongoDB!'
+  }
+]
+rs0 [direct: secondary] testDB> db.testCollection.insertOne({ name: "slave", message: "Hello!" });
+MongoServerError[NotWritablePrimary]: not primary
