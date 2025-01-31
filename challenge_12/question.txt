@@ -1,0 +1,9 @@
+1. StatefulSet
+Un StatefulSet est utilisé pour gérer des applications avec un état persistant. Contrairement à un Deployment, il garantit que :
+
+Les pods sont créés dans un ordre déterminé (-0, -1, etc.).
+Chaque pod a une identité stable (nom de pod et stockage persistant associés).
+Il est utilisé pour les bases de données comme MongoDB.
+
+2. Headless Service
+Un headless service permet aux pods d’être accessibles individuellement via des noms DNS stables. Contrairement à un service classique, il ne possède pas de cluster IP. Chaque pod du StatefulSet obtient son propre enregistrement DNS.
