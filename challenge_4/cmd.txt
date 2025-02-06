@@ -1,0 +1,4 @@
+docker-compose up -d --build
+
+Tester l'application sur un navigateur:
+http://localhost:8080/

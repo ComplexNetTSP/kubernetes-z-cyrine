@@ -1,0 +1,5 @@
+docker build -t cyrinez/webdb-probe:latest .
+docker push cyrinez/webdb-probe:latest
+
+kubectl apply -f mongodb-deployment.yaml
+kubectl apply -f deployment.yaml

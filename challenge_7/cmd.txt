@@ -1,0 +1,4 @@
+kubectl apply -f deployment.yaml
+
+kubectl proxy
+http://127.0.0.1:8001/api/v1/namespaces/czribi/services/webnodb-service/proxy/

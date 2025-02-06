@@ -1,0 +1,11 @@
+helm upgrade --install challenge13 ./challenge11-chart --namespace czribi
+
+kubectl set image deployments/webdb webdb=cyrinez/flask-app:v2 -n czribi
+kubectl set image deployments/webnodb webnodb=cyrinez/webnodb:v2 -n czribi
+
+kubectl rollout status deployments/webdb -n czribi
+kubectl rollout status deployments/webnodb -n czribi
+
+Test:
+curl http://webdb.czribi.net4255.luxbulb.org
+curl http://webnodb.czribi.net4255.luxbulb.org

@@ -1,0 +1,5 @@
+docker-compose build
+docker-compose up -d
+
+Tester l'application via un navigateur web:
+http://localhost:5001/

@@ -38,7 +38,7 @@ mongodb:
       cpu: "200m"
 
 webdb:
-  image: cyrinez/webdb-probe:latest
+  image: cyrinez/webdb:v2
   replicaCount: 3
   service:
     name: webdb
@@ -52,7 +52,7 @@ webdb:
       cpu: "200m"
 
 webnodb:
-  image: cyrinez/webnodb:latest
+  image: cyrinez/flask-webapp:latest
   replicaCount: 3
   service:
     name: webnodb

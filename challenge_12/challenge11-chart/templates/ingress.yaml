@@ -16,7 +16,7 @@ spec:
               service:
                 name: {{ .Values.webdb.service.name }}
                 port:
-                  number: {{ .Values.webdb.service.port }}
+                  number: 80
     - host: webnodb.czribi.net4255.luxbulb.org
       http:
         paths:
@@ -24,6 +24,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.webnodb.service.name }}
+                name: webnodb
                 port:
                   number: {{ .Values.webnodb.service.port }}

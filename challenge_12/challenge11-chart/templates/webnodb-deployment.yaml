@@ -7,7 +7,7 @@ spec:
   replicas: {{ .Values.webnodb.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.webnodb.service.name }}
+      app: webnodb
   template:
     metadata:
       labels:

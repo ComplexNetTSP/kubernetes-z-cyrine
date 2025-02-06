@@ -28,6 +28,7 @@ def home():
     return f"""
         <h1>Hello from Flask App 2</h1>
         <p>Connected to MongoDB</p>
+	<h1>Version : V2<h1>
         <p>Server Hostname: {client_ip}</p>
         <p>Current Date: {current_date}</p>
         <h3>Last 10 Requests</h3>

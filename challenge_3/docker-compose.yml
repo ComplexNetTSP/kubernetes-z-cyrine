@@ -3,9 +3,9 @@ services:
     build:
       context: .
     image: flask-app:v2
-    container_name: flask-app-v2
+    container_name: challenge3_flask-app
     ports:
-      - "5000:5000"
+      - "5001:5000"
     networks:
       - flask-mongo-network
     depends_on:

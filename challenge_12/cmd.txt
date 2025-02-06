@@ -1,0 +1,4 @@
+helm upgrade --install challenge12 ./challenge12-chart --namespace czribi
+
+kubectl get statefulset -n czribi
+kubectl get svc -n czribi

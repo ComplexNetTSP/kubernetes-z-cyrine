@@ -1,0 +1,13 @@
+kubectl apply -f mongodb-deployment.yaml
+kubectl apply -f webapp-deployment.yaml
+kubectl apply -f db-restrict-access.yaml
+kubectl describe networkpolicy db-restrict-access -n czribi
+
+Test: Connexion à la base de donnée à partir d'un pod de test
+kubectl run test-pod --rm -it --image=alpine --namespace=czribi -- sh
+nc -zv <database-pod-ip> 27017
+=>> Connexion refusée
+
+kubectl exec -it -l app=web-app -n czribi -- sh
+nc -zv <database-pod-ip> 27017
+=>> Connexion réussie

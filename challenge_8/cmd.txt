@@ -1,0 +1,10 @@
+docker build -t cyrinez/webdb:latest .
+docker run -p 5000:5000 cyrinez/webdb:latest
+docker login
+docker push cyrinez/webdb:latest
+
+kubectl apply -f webdb-deployment.yaml
+kubectl apply -f mongodb-deployment.yaml
+
+kubectl proxy
+http://localhost:8001/api/v1/namespaces/czribi/services/webdb-service/proxy/

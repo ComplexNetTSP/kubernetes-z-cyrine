@@ -6,7 +6,7 @@ import socket
 app = Flask(__name__)
 
 # Connexion à MongoDB
-mongo_client = MongoClient("mongodb://chall8-mongodb-service:27017/")
+mongo_client = MongoClient("mongodb://mongodb:27017/")
 db = mongo_client["challenge_db"]
 collection = db["requests"]
 
@@ -18,7 +18,7 @@ def home():
 
     # Récupération de l'adresse IP du pod
     pod_ip = socket.gethostbyname(socket.gethostname())
-
+    print(f"Hostname: {socket.gethostname()}")
     # Insertion dans MongoDB
     collection.insert_one({"client_ip": client_ip, "date": current_date, "pod_ip": pod_ip})
 

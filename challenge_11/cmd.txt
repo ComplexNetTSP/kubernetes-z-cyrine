@@ -1,0 +1,3 @@
+helm install challenge11 ./challenge11-chart --namespace czribi
+
+kubectl proxy

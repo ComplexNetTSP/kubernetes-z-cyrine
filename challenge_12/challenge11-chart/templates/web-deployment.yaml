@@ -17,7 +17,7 @@ spec:
         - name: webdb
           image: {{ .Values.webdb.image }}
           ports:
-            - containerPort: {{ .Values.webdb.service.port }}
+            - containerPort: 5000
           resources:
             requests:
               memory: {{ .Values.webdb.resources.requests.memory }}

@@ -1,0 +1,10 @@
+kubectl apply -f deployment.yaml
+kubectl apply -f hpa.yaml
+
+Test: Installer et executer un simulateur de charge stress-ng
+kubectl exec -it <pod-name> -- /bin/sh
+apt update && apt install -y stress-ng
+stress-ng --cpu 1 --timeout 60s --metrics-brief
+
+Verification du comportement des pods:
+kubectl get pods -n czribi

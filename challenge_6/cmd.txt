@@ -1,0 +1,9 @@
+kubectl create deployment webnodb --image=webnodb:latest --namespace=czribi
+kubectl get deployments -n czribi -o wide
+kubectl get pods -n czribi -o wide
+kubectl port-forward pod/[pod_id] 54127:5000 -n czribi
+
+Sur un navigateur:
+http://127.0.0.1:54127
+
+

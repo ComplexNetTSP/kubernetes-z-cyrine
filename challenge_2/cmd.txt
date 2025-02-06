@@ -1,0 +1,5 @@
+docker-compose up -d
+docker exec -it mongodb-container mongosh -u admin -p password --authenticationDatabase admin
+use my_database
+db.my_collection.insertOne({ name: "Cyrine", project: "Kubernetes Challenge" })
+db.my_collection.find()

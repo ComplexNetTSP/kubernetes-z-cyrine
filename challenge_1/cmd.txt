@@ -1,0 +1,8 @@
+docker build -t my-flask-app .
+docker run -d -p 5000:5000 --name flask-container my-flask-app
+docker login
+docker tag my-flask-app cyrinez/my-flask-app:v1
+docker push cyrinez/my-flask-app:v1
+
+Tester l'application via un navigateur:
+http://localhost:5000
